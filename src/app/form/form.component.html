@@ -1,0 +1,47 @@
+<p>FormControl</p>
+<label>Login</label>
+<input type="text" [formControl]="login">
+<div class="alert alert-danger" *ngIf="login.invalid && login.touched">
+  <p *ngIf="login.hasError('required')">Login is required</p>
+</div>
+
+<label>Password</label>
+<input type="text" [formControl]="pwd">
+<div class="alert alert-danger" *ngIf="pwd.invalid && pwd.touched">
+  <p *ngIf="pwd.hasError('required')">Password is required</p>
+</div>
+
+<input type="submit" value="save" (click)="save()" [disabled]="login.invalid || pwd.invalid">
+
+<p>FormGroup</p>
+<form [formGroup]="ResgisterForm">
+  <label>Nom</label>
+  <input type="text" formControlName="nom">
+  <div class="alert alert-danger" *ngIf="ResgisterForm.get('nom')?.invalid && ResgisterForm.get('nom')?.touched">
+    <p *ngIf="ResgisterForm.get('nom')?.hasError('required')">Nom doit être obligatoire</p>
+    <p *ngIf="ResgisterForm.get('nom')?.hasError('minlength')">Nom doit contenir au moins 6 caractères</p>
+  </div>
+
+  <label>Prénom</label>
+  <input type="text" formControlName="prenom">
+  <div class="alert alert-danger" *ngIf="ResgisterForm.get('prenom')?.invalid && ResgisterForm.get('prenom')?.touched">
+    <p *ngIf="ResgisterForm.get('prenom')?.hasError('required')">Prénom doit être obligatoire</p>
+    <p *ngIf="ResgisterForm.get('prenom')?.hasError('minlength')">Prénom doit contenir au moins 3 caractères</p>
+  </div>
+
+  <label>Email</label>
+  <input type="text" formControlName="email">
+  <div class="alert alert-danger" *ngIf="ResgisterForm.get('email')?.invalid && ResgisterForm.get('email')?.touched">
+    <p *ngIf="ResgisterForm.get('email')?.hasError('required')">Email doit être obligatoire</p>
+    <p *ngIf="ResgisterForm.get('email')?.hasError('email')">Email invalide</p>
+  </div>
+
+  <label>Tel</label>
+  <input type="text" formControlName="tel">
+  <div class="alert alert-danger" *ngIf="ResgisterForm.get('tel')?.invalid && ResgisterForm.get('tel')?.touched">
+    <p *ngIf="ResgisterForm.get('tel')?.hasError('required')">Tél doit être obligatoire</p>
+    <p *ngIf="ResgisterForm.get('tel')?.hasError('pattern')">Tél invalide</p>
+  </div>
+
+  <input type="submit" value="save" (click)="test()" [disabled]="ResgisterForm.invalid">
+</form>
